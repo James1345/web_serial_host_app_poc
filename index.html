@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Arduino Flasher</title>
+</head>
+<body>
+
+<button id="connect_button">Select Port!</button>
+<div id="info"></div>
+<button id="flash_button">Flash!</button>
+
+
+<script src="node_modules/arduino_serial_flasher/dist/main.js"></script>
+<script src="debug/hex.js"></script>
+<script>
+    document.getElementById("connect_button").addEventListener('click', connectPress);
+    document.getElementById("flash_button").addEventListener('click', flashPress);
+
+    const manager = new arduino_serial_flasher.WebSerialManager({
+        filters: [{usbVendorId: 0x2341}]
+    })
+
+    async function connectPress(e) {
+        e.preventDefault();
+        await manager.connect();
+
+        document.getElementById("info").innerText = JSON.stringify(await manager.getInfo(), undefined, 2);
+    }
+
+
+    async function flashPress(e) {
+        e.preventDefault();
+        await manager.flashSketch(HEX);
+    }
+</script>
+</body>
+</html>

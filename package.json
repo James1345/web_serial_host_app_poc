@@ -1,0 +1,7 @@
+{
+  "name": "arduino_serial_flasher_host",
+  "version": "1.0.0",
+  "dependencies": {
+    "arduino_serial_flasher": "github:bcmi-labs/arduino-chromeos-uploader#7f40f51072c548d864f71cff92a8ceeb01be94a1"
+  }
+}
